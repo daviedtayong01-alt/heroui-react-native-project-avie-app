@@ -1,7 +1,8 @@
-import { Button, Card, Typography, useThemeColor } from "heroui-native";
+import { Avatar, Button, Card, Typography, useThemeColor } from "heroui-native";
 import type { JSX } from "react";
 import { View } from "react-native";
 import Svg, { Path } from "react-native-svg";
+import { ImageBackground, Text } from "react-native";
 
 function HeroUILogo({ tintColor }: { tintColor: string }): JSX.Element {
   return (
@@ -34,17 +35,30 @@ export default function HomeScreen(): JSX.Element {
   const themeColorForeground = useThemeColor("foreground");
 
   return (
-    <View className="flex-1 bg-background justify-center px-6">
-      <Card className="items-center gap-8">
-        <HeroUILogo tintColor={themeColorForeground} />
-        <Typography.Paragraph className="text-center">
-          A modern starter for React Native, preconfigured with HeroUI Native, Uniwind, and Expo
-          Router. Edit{" "}
-          <Typography.Paragraph className="font-semibold">app/index.tsx</Typography.Paragraph> and
-          watch it reload.
-        </Typography.Paragraph>
-        <Button className="w-full">Get started</Button>
+    <View className="flex-1 bg-blue-300 justify-center align-middle px-6">
+      <Card className="w-3/4 mx-auto">
+        <View className="h-1/3 relative">
+          <ImageBackground
+            source={{ uri: "https://images.pexels.com/photos/30649280/pexels-photo-30649280.jpeg" }}
+            className="flex-1 justify-center items-center"
+            imageClassName="opacity-50"
+            tintColor="accent-blue-500 dark:accent-blue-700"
+          />
+          <Avatar className="absolute bottom-5 self-center" size="lg">
+            <Avatar.Image
+              source={{
+                uri: "https://scontent.fceb10-1.fna.fbcdn.net/v/t39.30808-6/571178415_835866635489014_4193247801864962975_n.jpg?stp=dst-jpg_tt6&cstp=mx958x959&ctp=s958x959&_nc_cat=104&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeEhBPi0-7F-9pIjd7TuS5sZs07eIHNmCyCzTt4gc2YLICVhSoQkQeJYNi9ogbOF_R-taG_ycz6GCgzm4Situ4Xl&_nc_ohc=uJe5_v-RMpsQ7kNvwG57WAo&_nc_oc=AdoskZsSvMxFRTM05VrgF5BcSrjFKH5ghZA0HthNMlIYdaAk5eb1c6FCR7KJ5N671f8&_nc_zt=23&_nc_ht=scontent.fceb10-1.fna&_nc_gid=F2CM6n9JfBcRCQid7SZKaA&_nc_ss=7b2a8&oh=00_Af_smMr7xvPCyxTI8MU0612itRyX2iGP3DpCIaE3T_6_pQ&oe=6A40FADF",
+              }}
+            />
+            <Avatar.Fallback>Joerl Davied P. Tayong</Avatar.Fallback>
+          </Avatar>
+        </View>
+        <View className="mt-8">
+          <Card.Title className="font-bold text-center text-2xl">Avie</Card.Title>
+          <Card.Description className="text-center text-xl">Facebook</Card.Description>
+        </View>
       </Card>
     </View>
   );
 }
+
