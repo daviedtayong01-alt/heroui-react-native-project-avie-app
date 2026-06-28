@@ -1,8 +1,15 @@
 import { Avatar, Button, Card, Typography, useThemeColor } from "heroui-native";
 import type { JSX } from "react";
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import Svg, { Path } from "react-native-svg";
-import { View, Text, ImageBackground, TouchableOpacity, ScrollView, Switch, SafeAreaView } from 'react-native';
+import {
+  View,
+  Text,
+  ImageBackground,
+  TouchableOpacity,
+  ScrollView,
+  SafeAreaView,
+} from "react-native";
 
 function HeroUILogo({ tintColor }: { tintColor: string }): JSX.Element {
   return (
@@ -32,220 +39,148 @@ function HeroUILogo({ tintColor }: { tintColor: string }): JSX.Element {
 }
 
 const stats = [
-  { label: 'Posts', value: '147', icon: '📝' },
-  { label: 'Followers', value: '12.4k', icon: '👥' },
-  { label: 'Following', value: '856', icon: '👤' },
-  { label: 'Likes', value: '3.2k', icon: '❤️' },
-];
-
-const recentActivity = [
-  { user: 'John Doe', action: 'liked your post', time: '2m ago' },
-  { user: 'Jane Smith', action: 'commented on your photo', time: '15m ago' },
-  { user: 'Mike Johnson', action: 'shared your content', time: '1h ago' },
+  { label: "Posts", value: "12", icon: "📝" },
+  { label: "Followers", value: "9.9k", icon: "👥" },
+  { label: "Following", value: "1", icon: "👤" },
+  { label: "Likes", value: "39.2k", icon: "❤️" },
 ];
 
 const Dashboard = () => {
   const [isDark, setIsDark] = useState(false);
-  const [activeTab, setActiveTab] = useState('home');
   const [isFollowing, setIsFollowing] = useState(false);
-  const [notificationCount] = useState(3);
 
-  // THIS IS THE FIX - Return the UI directly, don't define HomeScreen inside
   return (
-    <SafeAreaView className={`flex-1 ${isDark ? 'bg-gray-900' : 'bg-gradient-to-b from-blue-300 to-blue-500'}`}>
-      {/* HEADER WITH INTERACTIVE ELEMENTS */}
-      <View className="flex-row justify-between items-center px-6 pt-4 pb-4">
+    <SafeAreaView
+      className={`flex-1 ${isDark ? "bg-gray-900" : "bg-gradient-to-b from-blue-300 to-blue-500"}`}
+    >
+      {/* Header */}
+      <View className="flex-row justify-between items-center px-6 pt-4 pb-2">
         <View>
-          <Text className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-white'}`}>
-            Dashboard
+          <Text className={`text-2xl font-bold ${isDark ? "text-white" : "text-white"}`}>
+            Profile
           </Text>
-          <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-white/80'}`}>
-            Welcome back, Avie!
-          </Text>
+          <Text className={`text-sm ${isDark ? "text-gray-400" : "text-white/80"}`}>Avie</Text>
         </View>
-
-        {/* INTERACTIVE HEADER BUTTONS */}
-        <View className="flex-row items-center gap-4">
-          <TouchableOpacity
-            className="relative p-2 bg-white/20 rounded-full"
-            onPress={() => alert('Notifications')}
-          >
-            <Text className="text-white text-xl">🔔</Text>
-            {notificationCount > 0 && (
-              <View className="absolute -top-1 -right-1 bg-red-500 rounded-full w-5 h-5 items-center justify-center">
-                <Text className="text-white text-xs font-bold">{notificationCount}</Text>
-              </View>
-            )}
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            className="p-2 bg-white/20 rounded-full"
-            onPress={() => setIsDark(!isDark)}
-          >
-            <Text className="text-white text-xl">{isDark ? '☀️' : '🌙'}</Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          className="p-2 bg-white/20 rounded-full"
+          onPress={() => setIsDark(!isDark)}
+        >
+          <Text className="text-white text-xl">{isDark ? "☀️" : "🌙"}</Text>
+        </TouchableOpacity>
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* PROFILE CARD */}
-        <View className="px-6 mb-4">
-          <View className="overflow-hidden shadow-2xl rounded-3xl bg-white dark:bg-gray-800">
-            {/* HEADER WITH IMAGE */}
-            <View className="relative h-40 bg-blue-600">
+        {/* Profile Card */}
+        <View className="px-6 mt-2">
+          <View className="overflow-hidden rounded-3xl bg-white dark:bg-gray-800 shadow-lg">
+            {/* Cover Image */}
+            <View className="relative h-32 bg-blue-600">
               <ImageBackground
-                source={{ uri: "https://images.pexels.com/photos/30649280/pexels-photo-30649280.jpeg" }}
+                source={{
+                  uri: "https://images.pexels.com/photos/30649280/pexels-photo-30649280.jpeg",
+                }}
                 className="flex-1"
                 imageClassName="opacity-50"
               />
-              <View className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <View className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
             </View>
 
-            {/* AVATAR WITH FOLLOW BUTTON */}
-            <View className="relative -mt-12 items-center px-6">
-              <View className="relative">
-                <Avatar className="border-4 border-white dark:border-gray-800 shadow-lg" size="lg">
-                  <Avatar.Image
-                    source={{
-                      uri: "https://scontent.fceb10-1.fna.fbcdn.net/v/t39.30808-6/571178415_835866635489014_4193247801864962975_n.jpg?stp=dst-jpg_tt6&cstp=mx958x959&ctp=s958x959&_nc_cat=104&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeEhBPi0-7F-9pIjd7TuS5sZs07eIHNmCyCzTt4gc2YLICVhSoQkQeJYNi9ogbOF_R-taG_ycz6GCgzm4Situ4Xl&_nc_ohc=uJe5_v-RMpsQ7kNvwG57WAo&_nc_oc=AdoskZsSvMxFRTM05VrgF5BcSrjFKH5ghZA0HthNMlIYdaAk5eb1c6FCR7KJ5N671f8&_nc_zt=23&_nc_ht=scontent.fceb10-1.fna&_nc_gid=F2CM6n9JfBcRCQid7SZKaA&_nc_ss=7b2a8&oh=00_Af_smMr7xvPCyxTI8MU0612itRyX2iGP3DpCIaE3T_6_pQ&oe=6A40FADF"
-                    }}
-                  />
-                  <Avatar.Fallback>JD</Avatar.Fallback>
-                </Avatar>
-                <View className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 rounded-full border-2 border-white dark:border-gray-800" />
-              </View>
+            {/* Avatar */}
+            <View className="relative -mt-10 items-center px-6">
+              <Avatar className="border-4 border-white dark:border-gray-800 shadow-md" size="lg">
+                <Avatar.Image
+                  source={{
+                    uri: "https://scontent.fcgy1-3.fna.fbcdn.net/v/t1.15752-9/731037172_27300323686285757_6392860423528158107_n.png?stp=dst-png_s480x480&_nc_cat=107&ccb=1-7&_nc_sid=0024fc&_nc_eui2=AeGTzCj3ms4B_-OUG28UC5JoXQnwct_uoqZdCfBy3-6ipqnr8FtQETD8vFMSqdmPzP_Rc3dNxkcZCqmZpMIwS-cv&_nc_ohc=8K_Qq8SeeesQ7kNvwHfsgy2&_nc_oc=Adoyd-QBBKWoZsUYXxKEVs7KFAdY8GV3j1VwT-nJeQzXSeSoey7aPqpy1SkcfPA84KY&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.fcgy1-3.fna&_nc_ss=7a22e&oh=03_Q7cD5gFH_rma98GzWC-6Dsv31N73CoYL6ULLrA11MmgbVxktqQ&oe=6A68C06B",
+                  }}
+                />
+                <Avatar.Fallback>JD</Avatar.Fallback>
+              </Avatar>
+            </View>
 
-              {/* FOLLOW BUTTON */}
+            {/* User Info */}
+            <View className="px-6 pb-4 mt-2">
+              <Text className="font-bold text-center text-xl text-gray-800 dark:text-white">
+                Joerl Davied P. Tayong
+              </Text>
+              <Text className="text-center text-sm text-gray-500 dark:text-gray-400">Facebook</Text>
+
+              {/* Follow Button */}
               <TouchableOpacity
-                className={`mt-3 px-8 py-2 rounded-full ${
-                  isFollowing
-                    ? 'bg-gray-200 dark:bg-gray-700'
-                    : 'bg-blue-500 active:bg-blue-600'
+                className={`mt-3 mx-auto px-8 py-1.5 rounded-full ${
+                  isFollowing ? "bg-gray-200 dark:bg-gray-700" : "bg-blue-500"
                 }`}
                 onPress={() => setIsFollowing(!isFollowing)}
               >
-                <Text className={`font-semibold ${
-                  isFollowing
-                    ? 'text-gray-700 dark:text-gray-300'
-                    : 'text-white'
-                }`}>
-                  {isFollowing ? '✅ Following' : '➕ Follow'}
+                <Text
+                  className={`font-medium text-sm ${
+                    isFollowing ? "text-gray-700 dark:text-gray-300" : "text-white"
+                  }`}
+                >
+                  {isFollowing ? "Following" : "Follow"}
                 </Text>
               </TouchableOpacity>
-            </View>
-
-            {/* PROFILE INFO - FIXED: Using View instead of Card.Title */}
-            <View className="px-6 pb-4 mt-4">
-              <Text className="font-bold text-center text-2xl text-gray-800 dark:text-white">
-                Avie
-              </Text>
-              <Text className="text-center text-base text-gray-600 dark:text-gray-400">
-                Facebook
-              </Text>
-              <Text className="text-center text-sm text-gray-500 dark:text-gray-400 mt-2 px-4">
-                🚀 Coffee Lover | 💻 Batak mag Code Vibe? | ✨ Building then forgetting
-              </Text>
             </View>
           </View>
         </View>
 
-        {/* STATS CARDS */}
-        <View className="px-6 mb-4">
-          <Text className={`text-lg font-bold mb-3 ${isDark ? 'text-white' : 'text-white'}`}>
-            📊 Statistics
-          </Text>
-          <View className="flex-row flex-wrap gap-3">
+        {/* Stats */}
+        <View className="px-6 mt-4">
+          <View className="flex-row flex-wrap gap-2">
             {stats.map((stat, index) => (
-              <TouchableOpacity
-                key={index}
-                className={`w-[47%] bg-white dark:bg-gray-800 rounded-xl p-4 shadow-md active:opacity-70`}
-                onPress={() => alert(`${stat.label}: ${stat.value}`)}
-              >
+              <View key={index} className="w-[48%] bg-white/20 backdrop-blur-sm rounded-xl p-3">
                 <View className="flex-row items-center justify-between">
-                  <Text className="text-2xl">{stat.icon}</Text>
-                  <Text className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-800'}`}>
+                  <Text className="text-lg">{stat.icon}</Text>
+                  <Text className={`text-lg font-bold ${isDark ? "text-white" : "text-white"}`}>
                     {stat.value}
                   </Text>
                 </View>
-                <Text className={`text-sm mt-1 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                <Text className={`text-xs mt-0.5 ${isDark ? "text-gray-300" : "text-white/80"}`}>
                   {stat.label}
                 </Text>
-              </TouchableOpacity>
+              </View>
             ))}
           </View>
         </View>
 
-        {/* RECENT ACTIVITY - FIXED: Using View instead of Card */}
-        <View className="px-6 mb-4">
-          <Text className={`text-lg font-bold mb-3 ${isDark ? 'text-white' : 'text-white'}`}>
-            🔄 Recent Activity
-          </Text>
-          <View className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md">
-            {recentActivity.map((activity, index) => (
-              <TouchableOpacity
-                key={index}
-                className={`flex-row justify-between items-center p-4 ${
-                  index < recentActivity.length - 1 ? 'border-b border-gray-100 dark:border-gray-700' : ''
-                }`}
-                onPress={() => alert(`View activity from ${activity.user}`)}
+        {/* Quick Actions */}
+        <View className="px-6 pb-6 mt-4">
+          <View className="flex-row gap-3">
+            <TouchableOpacity
+              className="flex-1 bg-white/20 backdrop-blur-sm rounded-xl p-3 items-center"
+              onPress={() => alert("New Post")}
+            >
+              <Text className="text-xl">📝</Text>
+              <Text
+                className={`text-xs font-medium mt-1 ${isDark ? "text-gray-300" : "text-white"}`}
               >
-                <View>
-                  <Text className={`font-semibold ${isDark ? 'text-white' : 'text-gray-800'}`}>
-                    {activity.user}
-                  </Text>
-                  <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-                    {activity.action}
-                  </Text>
-                </View>
-                <Text className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
-                  {activity.time}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        </View>
-
-        {/* QUICK ACTIONS */}
-        <View className="px-6 pb-6">
-          <Text className={`text-lg font-bold mb-3 ${isDark ? 'text-white' : 'text-white'}`}>
-            ⚡ Quick Actions
-          </Text>
-          <View className="flex-row flex-wrap gap-3">
-            <TouchableOpacity
-              className="flex-1 bg-blue-500 rounded-xl p-4 items-center active:bg-blue-600"
-              onPress={() => alert('Create New Post')}
-            >
-              <Text className="text-2xl mb-1">📝</Text>
-              <Text className="text-white font-semibold">New Post</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              className="flex-1 bg-purple-500 rounded-xl p-4 items-center active:bg-purple-600"
-              onPress={() => alert('View Messages')}
-            >
-              <Text className="text-2xl mb-1">💬</Text>
-              <Text className="text-white font-semibold">Messages</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        {/* BOTTOM NAVIGATION */}
-        <View className="flex-row justify-around items-center bg-white dark:bg-gray-800 px-6 py-3 rounded-t-3xl shadow-lg">
-          {['home', 'search', 'plus', 'heart', 'profile'].map((tab) => (
-            <TouchableOpacity
-              key={tab}
-              className={`p-2 rounded-full ${activeTab === tab ? 'bg-blue-100 dark:bg-blue-900/30' : ''}`}
-              onPress={() => setActiveTab(tab)}
-            >
-              <Text className="text-2xl">
-                {tab === 'home' && '🏠'}
-                {tab === 'search' && '🔍'}
-                {tab === 'plus' && '➕'}
-                {tab === 'heart' && '❤️'}
-                {tab === 'profile' && '👤'}
+                Post
               </Text>
             </TouchableOpacity>
-          ))}
+
+            <TouchableOpacity
+              className="flex-1 bg-white/20 backdrop-blur-sm rounded-xl p-3 items-center"
+              onPress={() => alert("Messages")}
+            >
+              <Text className="text-xl">💬</Text>
+              <Text
+                className={`text-xs font-medium mt-1 ${isDark ? "text-gray-300" : "text-white"}`}
+              >
+                Message
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              className="flex-1 bg-white/20 backdrop-blur-sm rounded-xl p-3 items-center"
+              onPress={() => alert("Settings")}
+            >
+              <Text className="text-xl">⚙️</Text>
+              <Text
+                className={`text-xs font-medium mt-1 ${isDark ? "text-gray-300" : "text-white"}`}
+              >
+                Settings
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
